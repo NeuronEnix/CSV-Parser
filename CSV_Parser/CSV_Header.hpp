@@ -1,6 +1,6 @@
 #pragma once
 #include<fstream>
-#include<unordered_map>
+#include<map>
 #include<string>
 
 #include "CSV_Decoder.hpp"
@@ -8,7 +8,7 @@
 class CSV_Header {
 
 private:
-    std::unordered_map< std::string, size_t > header;
+    std::map< std::string, size_t > header;
 
 
 protected:
@@ -23,7 +23,7 @@ public:
     CSV_Header(){}
 
     // Public Methods
-    std::unordered_map< std::string, size_t >& getHeader();
+    std::map< std::string, size_t >& getHeader();
     size_t getHeaderPos( const std::string& headerName );
 
     
@@ -51,10 +51,7 @@ CSV_Header* CSV_Header::setHeader( std::ifstream& fin ) {
 
 // Public Methods
 
-std::unordered_map< std::string, size_t >& CSV_Header::getHeader() {    return this->header;    }
+std::map< std::string, size_t >& CSV_Header::getHeader() {    return this->header;    }
 
 size_t CSV_Header::getHeaderPos( const std::string& headerName ) {    return this->header.at( headerName ); }
-
-
-
   
