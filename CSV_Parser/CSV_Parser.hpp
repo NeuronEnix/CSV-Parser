@@ -1,3 +1,4 @@
+#pragma once
 #include<string>
 
 #include "CSV_Data.hpp"
