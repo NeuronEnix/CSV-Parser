@@ -1,10 +1,9 @@
-#include "CSV_Decoder.hpp"
+#include "CSV_Parser.hpp"
 
 int main() {
 
-    std::vector< std::string > ele;
-    CSV_Decoder::decodeToVectorOfString( "1,2,3", ele );
-    for( auto s: ele )
-        std::cout << s << "  ";
+    CSV_Parser parser = CSV_Parser();
+    parser.readFromFile( "file.csv" );
+        
     return 0;
 }
