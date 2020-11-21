@@ -1,7 +1,7 @@
 #pragma once
 #include<fstream>
-#include<string>
 #include<vector>
+#include<string>
 
 #include "CSV_Decoder.hpp"
 
@@ -10,27 +10,27 @@ class CSV_Data {
 private:
     std::vector< std::vector< std::string > > data;
 
-
 protected:
-
-    // Methods
-    CSV_Data* readDataFromFile( std::ifstream& fin );
-    CSV_Data* writeDataToFile( std::ofstream& fout );
-
+    /* Protected Methods */
+    CSV_Data* readFromFile( std::ifstream& fin  );
+    CSV_Data* writeToFile ( std::ofstream& fout );
 
 public:
-
-    // Constructors
+    /* Constructors */
     CSV_Data(){}
 
+    /* Public Methods */
+
+    // Retrieval
     std::vector< std::vector< std::string > >& getData();
+        
+}; // class CSV_Parser
+
+
+/* Protected Methods */
+
+CSV_Data* CSV_Data::readFromFile( std::ifstream& fin ) {
     
-};
-
-// Protected Methods
-
-CSV_Data* CSV_Data::readDataFromFile( std::ifstream& fin ) {
-
     this->data.clear();
     std::string line;
 
@@ -41,10 +41,9 @@ CSV_Data* CSV_Data::readDataFromFile( std::ifstream& fin ) {
         CSV_Decoder::decodeToVectorOfString( line, eachRowData );
         this->data.push_back( eachRowData );
     }
-    
 }
 
-CSV_Data* CSV_Data::writeDataToFile( std::ofstream& fout ) {
+CSV_Data* CSV_Data::writeToFile( std::ofstream& fout ) {
     
     for( const auto& eachLine : this->data ){
         for( const auto& eachEle : eachLine )
@@ -55,11 +54,8 @@ CSV_Data* CSV_Data::writeDataToFile( std::ofstream& fout ) {
     return this;
 }
 
-// Public Methods
 
-std::vector< std::vector< std::string > >& CSV_Data::getData() {
-    return this->data;
-}
-    
+/* Public Methods */
 
-    
+// Retrieval
+std::vector< std::vector< std::string > >& CSV_Data::getData() { return this->data; }

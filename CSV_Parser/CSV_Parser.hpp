@@ -7,23 +7,23 @@
 class CSV_Parser : public CSV_Header, public CSV_Data  {
 
 public:
-
     // Constructors
     CSV_Parser() {}
-
 
     // Methods
     CSV_Parser* readFromFile( const std::string& fileName );
     CSV_Parser* writeToFile ( const std::string& fileName );
 
-};
+}; // class CSV_Parser
 
-// Public Methods
+
+/* Public Methods */
+
 CSV_Parser* CSV_Parser::readFromFile( const std::string& fileName ) {
     std::ifstream fin( fileName );
     
-    CSV_Header::readHeaderFromFile( fin );
-    CSV_Data::readDataFromFile( fin );
+    CSV_Header::readFromFile( fin );
+    CSV_Data::readFromFile( fin );
 
     return this;
 }
@@ -32,8 +32,8 @@ CSV_Parser* CSV_Parser::writeToFile ( const std::string& fileName ) {
 
     std::ofstream fout( fileName );
 
-    CSV_Header::writeHeaderToFile( fout );
-    CSV_Data::writeDataToFile( fout );
+    CSV_Header::writeToFile( fout );
+    CSV_Data::writeToFile( fout );
 
     return this;        
 }
