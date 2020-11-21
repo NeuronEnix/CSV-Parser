@@ -22,26 +22,18 @@ public:
 CSV_Parser* CSV_Parser::readFromFile( const std::string& fileName ) {
     std::ifstream fin( fileName );
     
-    CSV_Header::setHeader( fin );
-    CSV_Data::setData( fin );
+    CSV_Header::readHeaderFromFile( fin );
+    CSV_Data::readDataFromFile( fin );
 
     return this;
 }
 
 CSV_Parser* CSV_Parser::writeToFile ( const std::string& fileName ) {
+
     std::ofstream fout( fileName );
 
-    // Write Headers
-    for( const auto& eachHeader: this->getHeader() )
-        fout << eachHeader.first << ',';
-    
-    fout << std::endl; 
+    CSV_Header::writeHeaderToFile( fout );
+    CSV_Data::writeDataToFile( fout );
 
-    // Write Data
-    for( const auto& eachLine : this->getData() ){
-        for( const auto& eachEle : eachLine )
-            fout << eachEle << ',';
-        fout << std::endl;
-    }
-        
+    return this;        
 }

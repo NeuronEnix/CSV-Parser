@@ -14,7 +14,8 @@ private:
 protected:
 
     // Methods
-    CSV_Data* setData( std::ifstream& fin );
+    CSV_Data* readDataFromFile( std::ifstream& fin );
+    CSV_Data* writeDataToFile( std::ofstream& fout );
 
 
 public:
@@ -28,7 +29,7 @@ public:
 
 // Protected Methods
 
-CSV_Data* CSV_Data::setData( std::ifstream& fin ) {
+CSV_Data* CSV_Data::readDataFromFile( std::ifstream& fin ) {
 
     this->data.clear();
     std::string line;
@@ -43,10 +44,22 @@ CSV_Data* CSV_Data::setData( std::ifstream& fin ) {
     
 }
 
+CSV_Data* CSV_Data::writeDataToFile( std::ofstream& fout ) {
+    
+    for( const auto& eachLine : this->data ){
+        for( const auto& eachEle : eachLine )
+            fout << eachEle << ',';
+        fout << std::endl;
+    }
+                
+    return this;
+}
 
 // Public Methods
 
 std::vector< std::vector< std::string > >& CSV_Data::getData() {
     return this->data;
 }
+    
+
     
