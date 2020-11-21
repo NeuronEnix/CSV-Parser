@@ -1,4 +1,6 @@
-#include<bits/stdc++.h>
+#pragma once
+#include<string>
+#include<vector>
 
 namespace CSV_Decoder
 {
