@@ -9,6 +9,8 @@ class CSV_Header {
 
 private:
     std::vector< std::string > header;
+    
+    // < headerName, headerPos > 
     std::unordered_map< std::string, int > headerMap;
 
 public:
@@ -29,8 +31,8 @@ public:
     int headerPos( const std::string& headerName );
 
     // Modifiers
-    void swapHeader( const std::string& firstHeaderName, const std::string secondHeaderName );
-    void swapHeader( const int firstPos, const int secondPos );    
+    bool swapHeader( const std::string& firstHeaderName, const std::string& secondHeaderName );
+    bool swapHeader( const int firstPos, const int secondPos );    
 
 }; // class CSV_Parser
 
