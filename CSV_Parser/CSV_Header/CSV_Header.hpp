@@ -13,6 +13,9 @@ private:
     // < headerName, headerPos > 
     std::unordered_map< std::string, int > headerMap;
 
+    bool isValied( const int pos ) const { return 0 <= pos or pos < this->header.size(); }
+    bool isValied( const std::string& headerName ) const { return this->headerMap.find( headerName ) != this->headerMap.end(); }
+
 public:
     /* Constructors */
     CSV_Header(){}
@@ -27,12 +30,23 @@ public:
     std::vector< std::string >& getHeader();
     
     // Finders
-    std::string headerAt( int pos );
-    int headerPos( const std::string& headerName );
+    std::string at( int pos );
+    int pos( const std::string& headerName );
 
     // Modifiers
-    bool swapHeader( const std::string& firstHeaderName, const std::string& secondHeaderName );
-    bool swapHeader( const int firstPos, const int secondPos );    
+    
+    bool swap( const std::string& firstHeaderName, const std::string& secondHeaderName );
+    bool swap( const int firstPos, const int secondPos );    
+
+    bool moveTo( const std::string& headerName, const int newPos );
+
+    bool rename( const std::string& curHeaderName, const std::string& newHeaderName );
+    
+    bool erase( const std::string& headerName );
+    bool erase( const int headerPos );
+    
+
+
 
 }; // class CSV_Parser
 

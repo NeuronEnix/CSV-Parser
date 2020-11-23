@@ -1,15 +1,16 @@
 #pragma once
 #include "../CSV_Header.hpp"
 
-std::string CSV_Header::headerAt( int pos ) {
-    const int min = 0, max = this->header.size();
-    if( pos >= min and pos < max ) return this->header[ pos ];
-    throw std::out_of_range( "CSV_Header::headerAt( " + std::to_string( pos ) + " ): Available range: min:0, max:" + std::to_string( max ) );
+std::string CSV_Header::at( int pos ) {
+    if( !this->isValied( pos ) )
+        throw std::out_of_range( "CSV_Header::at( " + std::to_string( pos ) + " ): Available range: min:0, max:" + std::to_string( this->header.size() - 1 ) );
+
+    return this->header[ pos ];
+    
 }
 
-int CSV_Header::headerPos( const std::string& headerName ) {
-    auto foundHeaderIterator = this->headerMap.find( headerName );
-    if ( foundHeaderIterator == this->headerMap.end() )
-        return -1;
-    return foundHeaderIterator->second;    
+int CSV_Header::pos( const std::string& headerName ) {
+    if( this->isValied( headerName ) )
+        return this->headerMap[ headerName ];    
+    return -1;
 }

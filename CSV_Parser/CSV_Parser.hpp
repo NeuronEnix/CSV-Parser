@@ -65,9 +65,9 @@ std::vector< std::vector< std::string > >& CSV_Parser::getData() { return this->
 
 // Finders
 
-std::string CSV_Parser::headerAt( const int pos ) { return this->header->headerAt( pos ); }
+std::string CSV_Parser::headerAt( const int pos ) { return this->header->at( pos ); }
 
-int CSV_Parser::headerPos( const std::string& headerName ) { return this->header->headerPos( headerName ); }
+int CSV_Parser::headerPos( const std::string& headerName ) { return this->header->pos( headerName ); }
 
 
 // Modifiers
