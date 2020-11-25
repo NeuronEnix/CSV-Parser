@@ -20,9 +20,9 @@ CSV_Data* CSV_Data::readFromFile( std::ifstream& fin ) {
 
 CSV_Data* CSV_Data::writeToFile( std::ofstream& fout ) {
     
-    for( const auto& eachLine : this->data ){
-        for( const auto& eachEle : eachLine )
-            fout << eachEle << ',';
+    for( const auto& eachLine : this->data ) {
+        for( const int ind: this->virtualColPos ) 
+            fout << eachLine[ ind ] << ",";
         fout << std::endl;
     }
                 
