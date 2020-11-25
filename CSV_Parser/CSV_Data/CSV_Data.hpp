@@ -9,6 +9,9 @@ class CSV_Data {
 
 private:
     std::vector< std::vector< std::string > > data;
+    std::vector< int > virtualColPos;
+
+    inline bool isValidPos( int pos ) { if( 0 <= pos and pos < this->virtualColPos.size() ); }
 
 public:
     /* Constructors */
@@ -23,10 +26,18 @@ public:
     // Retrievers
     std::vector< std::vector< std::string > >& getData();
 
+    // Modifiers
+    bool swap( const int firstPos, const int secondPos );
+
+    bool moveTo( int curPos, const int newPos );
+
+    // Erasers
+    bool erase( const int erasePos );
+    
         
 }; // class CSV_Parser
 
-#include "CSV_Data_Methods/CSV_Data_Deleters.hpp"
+#include "CSV_Data_Methods/CSV_Data_Erasers.hpp"
 #include "CSV_Data_Methods/CSV_Data_Finders.hpp"
 #include "CSV_Data_Methods/CSV_Data_IO.hpp"
 #include "CSV_Data_Methods/CSV_Data_Modifiers.hpp"

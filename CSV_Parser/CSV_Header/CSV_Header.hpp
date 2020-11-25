@@ -1,4 +1,5 @@
 #pragma once
+
 #include<fstream>
 #include<unordered_map>
 #include<string>
@@ -13,8 +14,8 @@ private:
     // < headerName, headerPos > 
     std::unordered_map< std::string, int > headerMap;
 
-    bool isValied( const int pos ) const { return 0 <= pos or pos < this->header.size(); }
-    bool isValied( const std::string& headerName ) const { return this->headerMap.find( headerName ) != this->headerMap.end(); }
+    inline bool isValied( const int pos ) const { return 0 <= pos or pos < this->header.size(); }
+    inline bool isValied( const std::string& headerName ) const { return this->headerMap.find( headerName ) != this->headerMap.end(); }
 
 public:
     /* Constructors */
@@ -42,6 +43,8 @@ public:
 
     bool rename( const std::string& curHeaderName, const std::string& newHeaderName );
     
+    // Erasers
+    
     bool erase( const std::string& headerName );
     bool erase( const int headerPos );
     
@@ -51,7 +54,7 @@ public:
 }; // class CSV_Parser
 
 
-#include "CSV_Header_Methods/CSV_Header_Deleters.hpp"
+#include "CSV_Header_Methods/CSV_Header_Erasers.hpp"
 #include "CSV_Header_Methods/CSV_Header_Finders.hpp"
 #include "CSV_Header_Methods/CSV_Header_IO.hpp"
 #include "CSV_Header_Methods/CSV_Header_Modifiers.hpp"
