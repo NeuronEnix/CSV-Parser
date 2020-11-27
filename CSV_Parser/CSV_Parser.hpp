@@ -28,8 +28,8 @@ public:
     int headerPos( const std::string& headerName );
 
     // Modifiers
-
-
+    bool swapHeader( const string& firstHeader, const string& secondHeader );
+    bool swapHeader( const int firstHeader, const int secondHeader );  
 
 }; // class CSV_Parser
 
