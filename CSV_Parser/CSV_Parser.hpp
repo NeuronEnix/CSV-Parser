@@ -28,8 +28,19 @@ public:
     int headerPos( const std::string& headerName );
 
     // Modifiers
-    bool swapHeader( const string& firstHeader, const string& secondHeader );
-    bool swapHeader( const int firstHeader, const int secondHeader );  
+    bool swap( const int firstHeaderPos, const int secondHeaderPos );  
+    bool swap( const std::string& firstHeaderName, const std::string& secondHeaderName );
+
+    bool moveHeaderTo( const std::string& headerName, const int newPos );
+
+    bool renameHeaderName( const std::string& curHeaderName, const std::string& newHeaderName );
+
+    bool sync();
+
+    // Erasers
+    bool eraseCol( const std::string& headerName );
+    bool eraseCol( const int colPos );
+    bool eraseRow( const int rowPos );
 
 }; // class CSV_Parser
 
@@ -71,3 +82,34 @@ int CSV_Parser::headerPos( const std::string& headerName ) { return this->header
 
 
 // Modifiers
+
+bool CSV_Parser::swap( const int firstHeaderPos, const int secondHeaderPos ) {
+    return this->header->swap( firstHeaderPos, secondHeaderPos ) and this->data->swapCol( firstHeaderPos, secondHeaderPos );
+}
+
+bool CSV_Parser::swap( const std::string& firstHeaderName, const std::string& secondHeaderName ){
+    int firstHeaderPos = this->header->pos( firstHeaderName );
+    int secondHeaderPos = this->header->pos( secondHeaderName );
+    return this->swap( firstHeaderPos, secondHeaderPos );
+}
+
+bool CSV_Parser::moveHeaderTo( const std::string& headerName, const int newPos ) {
+    const int headerPos = this->header->pos( headerName );
+    return this->header->moveTo( headerName, newPos ) and this->data->moveTo( headerPos, newPos );
+}
+
+bool CSV_Parser::renameHeaderName( const std::string& curHeaderName, const std::string& newHeaderName ) {
+    return this->header->rename( curHeaderName, newHeaderName );
+}
+
+
+// Erasers
+bool CSV_Parser::eraseCol( const std::string& headerName ) {
+    return this->eraseCol( this->header->pos( headerName ) );
+}
+bool CSV_Parser::eraseCol( const int colPos ) {
+    return this->header->erase( colPos ) and this->data->eraseCol( colPos );
+}
+bool CSV_Parser::eraseRow( const int rowPos ) {
+    return this->data->eraseRow( rowPos );
+}
