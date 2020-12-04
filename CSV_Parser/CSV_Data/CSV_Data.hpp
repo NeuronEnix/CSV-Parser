@@ -11,7 +11,8 @@ private:
     std::vector< std::vector< std::string > > data;
     std::vector< int > virtualColPos;
 
-    inline bool isValidPos( int pos ) { if( 0 <= pos and pos < this->virtualColPos.size() ); }
+    inline bool isValidColPos( int pos ) { if( 0 <= pos and pos < this->virtualColPos.size() ); }
+    inline bool isValidRowPos( int pos ) { if( 0 <= pos and pos < this->data.size() ); }
 
 public:
     /* Constructors */
@@ -27,12 +28,14 @@ public:
     std::vector< std::vector< std::string > >& getData();
 
     // Modifiers
-    bool swap( const int firstPos, const int secondPos );
+    bool swapCol( const int firstColPos, const int secondColPos );
+    bool swapRow( const int firstRowPos, const int secondRowPos );
 
     bool moveTo( int curPos, const int newPos );
 
     // Erasers
-    bool erase( const int erasePos );
+    bool eraseCol( const int colPos );
+    bool eraseRow( const int rowPos );
     
         
 }; // class CSV_Parser
