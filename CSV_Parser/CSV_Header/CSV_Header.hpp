@@ -14,7 +14,7 @@ private:
     // < headerName, headerPos > 
     std::unordered_map< std::string, int > headerMap;
 
-    inline bool isValied( const int pos ) const { return 0 <= pos or pos < this->header.size(); }
+    inline bool isValied( const int pos ) const { return 0 <= pos and pos < this->header.size(); }
     inline bool isValied( const std::string& headerName ) const { return this->headerMap.find( headerName ) != this->headerMap.end(); }
 
 public:
