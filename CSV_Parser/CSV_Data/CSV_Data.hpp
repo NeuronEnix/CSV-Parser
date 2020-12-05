@@ -11,8 +11,8 @@ private:
     std::vector< std::vector< std::string > > data;
     std::vector< int > virtualColPos;
 
-    inline bool isValidColPos( int pos ) { if( 0 <= pos and pos < this->virtualColPos.size() ); }
-    inline bool isValidRowPos( int pos ) { if( 0 <= pos and pos < this->data.size() ); }
+    inline bool isValidColPos( int pos ) { return 0 <= pos and pos < this->virtualColPos.size(); }
+    inline bool isValidRowPos( int pos ) { return 0 <= pos and pos < this->data.size();  }
 
 public:
     /* Constructors */
