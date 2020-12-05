@@ -28,11 +28,12 @@ public:
     int headerPos( const std::string& headerName );
 
     // Modifiers
-    bool swap( const int firstHeaderPos, const int secondHeaderPos );  
-    bool swap( const std::string& firstHeaderName, const std::string& secondHeaderName );
+    bool swapCol( const int firstHeaderPos, const int secondHeaderPos );  
+    bool swapCol( const std::string& firstHeaderName, const std::string& secondHeaderName );
 
-    bool moveHeaderTo( const std::string& headerName, const int newPos );
+    bool swapRow( const int firstRowPos, const int secondRowPos );  
 
+    bool moveCol( const std::string& headerName, const int newPos );
     bool renameHeader( const std::string& curHeaderName, const std::string& newHeaderName );
 
     bool sync();
@@ -83,17 +84,21 @@ int CSV_Parser::headerPos( const std::string& headerName ) { return this->header
 
 // Modifiers
 
-bool CSV_Parser::swap( const int firstHeaderPos, const int secondHeaderPos ) {
+bool CSV_Parser::swapCol( const int firstHeaderPos, const int secondHeaderPos ) {
     return this->header->swap( firstHeaderPos, secondHeaderPos ) and this->data->swapCol( firstHeaderPos, secondHeaderPos );
 }
 
-bool CSV_Parser::swap( const std::string& firstHeaderName, const std::string& secondHeaderName ){
+bool CSV_Parser::swapCol( const std::string& firstHeaderName, const std::string& secondHeaderName ){
     int firstHeaderPos = this->header->pos( firstHeaderName );
     int secondHeaderPos = this->header->pos( secondHeaderName );
-    return this->swap( firstHeaderPos, secondHeaderPos );
+    return this->swapCol( firstHeaderPos, secondHeaderPos );
 }
 
-bool CSV_Parser::moveHeaderTo( const std::string& headerName, const int newPos ) {
+bool CSV_Parser::swapRow( const int firstRowPos, const int secondRowPos ) {
+    return this->data->swapRow( firstRowPos, secondRowPos );
+}
+
+bool CSV_Parser::moveCol( const std::string& headerName, const int newPos ) {
     const int headerPos = this->header->pos( headerName );
     return this->header->moveTo( headerName, newPos ) and this->data->moveTo( headerPos, newPos );
 }
