@@ -4,14 +4,18 @@
 /* Erasers */
 
 bool CSV_Header::erase( const int headerPos ) {
-    if( !this->isValied( headerPos ) ) return false;
-
-    this->headerMap.erase( this->header[headerPos] );
-    this->header.erase( this->header.begin() + headerPos );
-    
-    return true;
+    return this->erase( this->at( headerPos ) );
 }
 
 bool CSV_Header::erase( const std::string& headerName ) {
-    this->erase( this->pos( headerName ) );
+    if( !this->isValied( headerName ) ) return false;
+
+    // move the header to the end
+    this->moveTo( headerName, this->header.size()-1 );
+
+    // erase the last header after moving
+    this->header.erase( this->header.end() - 1 );
+    this->headerMap.erase( headerName );
+
+    return true;
 }
