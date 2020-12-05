@@ -4,13 +4,9 @@
 bool CSV_Data::eraseCol( const int colPos ) {
     if( !this->isValidColPos( colPos ) ) return false;
 
-    // Move the pos to be erased to the end
-    this->moveTo( colPos, this->virtualColPos.size() -1 ); 
+    this->virtualColPos.erase( this->virtualColPos.begin() + colPos );
 
-    // Make the pos to be erased as -1 in "this->virtualColPos"
-    this->virtualColPos[ this->virtualColPos.size() - 1 ] = -1; 
-
-    return false;
+    return true;
 }
 
 bool CSV_Data::eraseRow( const int rowPos ) {

@@ -45,8 +45,7 @@ bool CSV_Header::moveTo( const std::string& headerName, const int newPos ) {
 }
 
 bool CSV_Header::rename( const std::string& curHeaderName, const std::string& newHeaderName ) {
-    if( !this->isValied( curHeaderName ) or !this->isValied( newHeaderName ) )
-        return false;
+    if( !this->isValied( curHeaderName ) or this->isValied( newHeaderName ) ) return false;
 
     int curHeaderPos = this->headerMap[ curHeaderName ];
 
@@ -56,19 +55,3 @@ bool CSV_Header::rename( const std::string& curHeaderName, const std::string& ne
 
     return true;    
 }
-
-bool CSV_Header::erase( const std::string& headerName ) {
-    if( !this->isValied( headerName ) ) return false;
-
-    int headerPos = this->headerMap[ headerName ];
-    
-    this->header.erase( this->header.begin() + headerPos );
-    this->headerMap.erase( headerName );
-
-    return true;
-}
-
-bool CSV_Header::erase( const int headerPos ) {
-    return this->erase( this->header[ headerPos ] );
-}
-
