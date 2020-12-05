@@ -33,7 +33,7 @@ public:
 
     bool moveHeaderTo( const std::string& headerName, const int newPos );
 
-    bool renameHeaderName( const std::string& curHeaderName, const std::string& newHeaderName );
+    bool renameHeader( const std::string& curHeaderName, const std::string& newHeaderName );
 
     bool sync();
 
@@ -98,7 +98,7 @@ bool CSV_Parser::moveHeaderTo( const std::string& headerName, const int newPos )
     return this->header->moveTo( headerName, newPos ) and this->data->moveTo( headerPos, newPos );
 }
 
-bool CSV_Parser::renameHeaderName( const std::string& curHeaderName, const std::string& newHeaderName ) {
+bool CSV_Parser::renameHeader( const std::string& curHeaderName, const std::string& newHeaderName ) {
     return this->header->rename( curHeaderName, newHeaderName );
 }
 
