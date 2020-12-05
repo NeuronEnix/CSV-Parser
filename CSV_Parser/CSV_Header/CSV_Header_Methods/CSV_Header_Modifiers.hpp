@@ -36,11 +36,10 @@ bool CSV_Header::moveTo( const std::string& headerName, const int newPos ) {
 
     int curPos = this->headerMap[ headerName ];
 
-    if( curPos < newPos ) // 0,1,2,..., curPos,..., newPos  ( move right )    
-        while( curPos != newPos ) this->swap( curPos, ++curPos );
-
-    else // 0,1,2,..., newPos,..., curPos  ( move left )    
-        while( curPos != newPos ) this->swap( curPos, --curPos );
+    // 0,1,2,..., curPos,..., newPos  ( move right )    
+    while( curPos < newPos ) this->swap( curPos++, curPos+1 );
+    // 0,1,2,..., newPos,..., curPos  ( move left )    
+    while( curPos > newPos ) this->swap( curPos--, curPos-1  );
     
     return true;
 }

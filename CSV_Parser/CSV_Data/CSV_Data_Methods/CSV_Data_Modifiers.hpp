@@ -19,11 +19,10 @@ bool CSV_Data::moveTo( const int curPos, const int newPos ) {
 
     if( !this->isValidColPos( _curPos ) or !this->isValidColPos( newPos ) ) return false;
     
-    if( _curPos < newPos ) // 0,1,2,..., curPos,..., newPos  ( move right )    
-        while( _curPos != newPos ) this->swapCol( _curPos, ++_curPos );
-
-    else // 0,1,2,..., newPos,..., curPos  ( move left )    
-        while( _curPos != newPos ) this->swapCol( _curPos, --_curPos );
+    // 0,1,2,..., curPos,..., newPos  ( move right )    
+    while( _curPos < newPos ) this->swapCol( _curPos++, curPos+1 );
+    // 0,1,2,..., newPos,..., curPos  ( move left )    
+    while( _curPos > newPos ) this->swapCol( _curPos--, curPos-1 );
         
     return true;
 }
