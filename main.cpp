@@ -6,9 +6,28 @@ int main() {
 
     CSV_Parser parser = CSV_Parser();
     parser.readFromFile( "file.csv" );
-    
-    vector< string > parsedHeader = parser.getHeader();
-    vector< vector< string > > parsedData = parser.getData();
+
+    // Headers : [ "H0", "H1", "H2", "H3" ]
+
+    /* Finders */
+    parser.headerAt( 2 ); // returns: "H2"
+    parser.headerPos( "H3" ); // returns: 3
+
+    /* Retrievers */
+    cout << parser[0][0] << endl; // returns data at row:0, col:0
+
+    parser[0][1] = "New Data";
+    parser[1]["H4"] = "Another New Data";
+
+    // Headers : [ "H0", "H1", "H2", "H3" ]
+
+    /* Modifiers */
+    parser.swapRow( 1, 5 ); // Data of given two row will be swapped 
+
+    parser.swapCol( "H0", "H1" ); // Headers : [ "H1", "H0", "H2", "H3" ]
+    parser.swapCol( 0, 1 ); // Headers : [ "H0", "H1", "H2", "H3" ]
+
+    parser.moveCol( "H0", 2 ); // Headers : [ "H2", "H1", "H0", "H3" ]
 
     cout << "Position of Header0: " << parser.headerPos( "Header0" ); // output: 0
     cout << "\nHeader at 1: " << parser.headerAt( 1 ); // output: Header1 

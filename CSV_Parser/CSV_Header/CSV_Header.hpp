@@ -26,9 +26,6 @@ public:
     // IO Operation
     CSV_Header* readFromFile( std::ifstream& fin  );
     CSV_Header* writeToFile ( std::ofstream& fout );
-
-    // Retrivers
-    std::vector< std::string >& getHeader();
     
     // Finders
     std::string at( int pos );
@@ -58,4 +55,3 @@ public:
 #include "CSV_Header_Methods/CSV_Header_Finders.hpp"
 #include "CSV_Header_Methods/CSV_Header_IO.hpp"
 #include "CSV_Header_Methods/CSV_Header_Modifiers.hpp"
-#include "CSV_Header_Methods/CSV_Header_Retrievers.hpp"

@@ -3,15 +3,36 @@
 #include "CSV_Header/CSV_Header.hpp"
 #include "CSV_Data/CSV_Data.hpp"
 
+class BracketHelper {
+private:
+    CSV_Header *header;
+    CSV_Data *data;
+    size_t rowPos;
+public:
+    BracketHelper( CSV_Header *header, CSV_Data *data ):
+    header(header),    data(data) 
+    {}
+    void setRowPos( const size_t rowPos ) { this->rowPos = rowPos; } 
+    std::string& operator [] ( const int& colPos ) {
+        return this->data->at( this->rowPos, colPos );
+    }
+
+    std::string& operator [] ( const std::string& colHeader ) {
+        return this->data->at( this->rowPos, this->header->pos( colHeader ) );
+    }
+    
+};
+
 class CSV_Parser {
 
 private:
     CSV_Header *header;
     CSV_Data *data;
+    BracketHelper bracketHelper;
 
 public:
     /* Constructors */
-    CSV_Parser() : header( new CSV_Header() ), data( new CSV_Data() ) {}
+    CSV_Parser() : header( new CSV_Header() ), data( new CSV_Data() ), bracketHelper( header, data ) {}
 
     /* Public Methods */
 
@@ -20,8 +41,7 @@ public:
     CSV_Parser* writeToFile ( const std::string& fileName );
 
     // Retrievers
-    std::vector< std::string >& getHeader();
-    std::vector< std::vector< std::string > >& getData();
+    BracketHelper& operator [] ( const size_t rowPos );
 
     // Finders
     std::string headerAt( const int pos );
@@ -69,11 +89,10 @@ CSV_Parser* CSV_Parser::writeToFile ( const std::string& fileName ) {
 
 
 // Retrievers
-
-std::vector< std::string >& CSV_Parser::getHeader() { return this->header->getHeader(); }
-
-std::vector< std::vector< std::string > >& CSV_Parser::getData() { return this->data->getData(); } 
-
+BracketHelper& CSV_Parser::operator [] ( const size_t rowPos ) {
+    this->bracketHelper.setRowPos( rowPos );
+    return this->bracketHelper;
+}
 
 // Finders
 

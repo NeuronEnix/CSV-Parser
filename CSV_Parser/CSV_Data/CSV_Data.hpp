@@ -25,7 +25,7 @@ public:
     CSV_Data* writeToFile ( std::ofstream& fout );
 
     // Retrievers
-    std::vector< std::vector< std::string > >& getData();
+    std::string& at( const size_t rowPos, const size_t colPos );
 
     // Modifiers
     bool swapCol( const int firstColPos, const int secondColPos );
