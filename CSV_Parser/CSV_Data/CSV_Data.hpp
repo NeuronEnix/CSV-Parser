@@ -28,6 +28,8 @@ public:
     std::string& at( const size_t rowPos, const size_t colPos );
 
     // Modifiers
+    bool appendCol( const std::vector<std::string>& colData );
+    
     bool swapCol( const int firstColPos, const int secondColPos );
     bool swapRow( const int firstRowPos, const int secondRowPos );
 

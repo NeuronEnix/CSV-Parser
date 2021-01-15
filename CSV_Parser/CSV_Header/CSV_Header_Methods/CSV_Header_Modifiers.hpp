@@ -1,6 +1,20 @@
 #pragma once
 #include "../CSV_Header.hpp"
 
+/* Adders */
+
+bool CSV_Header::append( const std::string& headerName ) {
+    // if header already exist return false
+    if( this->isValied( headerName ) ) return false;
+
+    // add headerName to headerList
+    this->header.push_back( headerName );
+    // add headerName to headerMap and assign last pos to it
+    this->headerMap[ this->header.back() ] = this->header.size()-1;
+
+    return true;
+}
+
 /* Swappers */
 
 bool CSV_Header::swap( const std::string& firstHeaderName, const std::string& secondHeaderName ) {

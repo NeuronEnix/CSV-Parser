@@ -48,6 +48,8 @@ public:
     int headerPos( const std::string& headerName );
 
     // Modifiers
+    bool appendCol( const std::string& headerName, const std::vector<std::string>& colData );
+    
     bool swapCol( const int firstHeaderPos, const int secondHeaderPos );  
     bool swapCol( const std::string& firstHeaderName, const std::string& secondHeaderName );
 
@@ -102,6 +104,10 @@ int CSV_Parser::headerPos( const std::string& headerName ) { return this->header
 
 
 // Modifiers
+
+bool CSV_Parser::appendCol( const std::string& headerName, const std::vector<std::string>& colData = std::vector<std::string>() ) {
+    return this->header->append( headerName ) and this->data->appendCol( colData );    
+}
 
 bool CSV_Parser::swapCol( const int firstHeaderPos, const int secondHeaderPos ) {
     return this->header->swap( firstHeaderPos, secondHeaderPos ) and this->data->swapCol( firstHeaderPos, secondHeaderPos );

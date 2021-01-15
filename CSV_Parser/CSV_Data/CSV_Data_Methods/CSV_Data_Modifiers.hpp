@@ -1,6 +1,25 @@
 #pragma once
 #include "../CSV_Data.hpp"
 
+bool CSV_Data::appendCol( const std::vector<std::string>& colData ) {
+    // Col will be added at the last pos
+    // Add size of any one of the row of "this->data" as the last ele in virtualColPos
+    this->virtualColPos.push_back( this->data[0].size() );
+
+    int it = 0;
+
+    while( it < colData.size() and it < this->data.size() ) {
+        this->data[it].push_back( colData[it] );
+        ++it;
+    }
+
+    // update remaining row if there is left any
+    while( it < this->data.size() )
+        this->data[it++].push_back( "" );
+        
+    return true;
+}
+
 bool CSV_Data::swapCol( const int firstColPos, const int secondColPos ) {
     if( !this->isValidColPos( firstColPos ) or !this->isValidColPos( secondColPos ) ) return false;
     std::swap( this->virtualColPos[ firstColPos ], this->virtualColPos[ secondColPos ] );

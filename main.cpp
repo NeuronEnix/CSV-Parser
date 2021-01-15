@@ -32,6 +32,11 @@ int main() {
     cout << "Position of Header0: " << parser.headerPos( "Header0" ); // output: 0
     cout << "\nHeader at 1: " << parser.headerAt( 1 ); // output: Header1 
 
+    parser.appendCol( "Header3" ); // Adds only header name and the data will have empty string
+    parser.appendCol( "Header4", {"1", "2", "3", } ); // Adds headerName , and 2nd argument will be added as data 
+
+    parser.moveCol( "Header3", 0 );
+
     parser.writeToFile( "new file.csv" );
         
     return 0;

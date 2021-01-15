@@ -32,6 +32,7 @@ public:
     int pos( const std::string& headerName );
 
     // Modifiers
+    bool append( const std::string& headerName );
     
     bool swap( const std::string& firstHeaderName, const std::string& secondHeaderName );
     bool swap( const int firstPos, const int secondPos );    
